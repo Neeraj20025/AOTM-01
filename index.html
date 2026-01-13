@@ -1,46 +1,641 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Under Construction</title>
+<meta charset="UTF-8">
+<title>12 Principles of Animation | Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
+<style>
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* BODY */
+body{
+    background:#020617;
+    color:#e5e7eb;
+    scroll-behavior:smooth;
+}
+
+/* NAVBAR */
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(2,6,23,0.9);
+    backdrop-filter:blur(10px);
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+}
+
+nav h2{
+    color:#38bdf8;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:25px;
+}
+
+nav ul li a{
+    color:#cbd5f5;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+nav ul li a:hover{
+    color:#38bdf8;
+}
+
+/* HERO */
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:120px 20px 40px;
+}
+
+.hero h1{
+    font-size:3rem;
+    color:#38bdf8;
+}
+
+.hero p{
+    max-width:800px;
+    margin-top:15px;
+    color:#cbd5f5;
+}
+
+/* SECTION */
+section{
+    padding:80px 30px;
+    max-width:1300px;
+    margin:auto;
+}
+
+section h2{
+    text-align:center;
+    margin-bottom:40px;
+    font-size:2.4rem;
+    color:#38bdf8;
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,0.05);
+    border-radius:18px;
+    overflow:hidden;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    transform:translateY(40px);
+    opacity:0;
+    transition:0.6s ease;
+}
+
+.card.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:20px;
+}
+
+.card-content span{
+    background:#38bdf8;
+    color:#020617;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:0.8rem;
+    font-weight:bold;
+}
+
+.card-content h3{
+    margin:10px 0;
+}
+
+.card-content p{
+    color:#cbd5f5;
+    font-size:0.9rem;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 20px 45px rgba(56,189,248,0.35);
+}
+
+/* MODAL */
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(2,6,23,0.85);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    pointer-events:none;
+    transition:0.4s;
+    z-index:2000;
+}
+
+.modal.active{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.modal-content{
+    background:#020617;
+    padding:30px;
+    width:90%;
+    max-width:600px;
+    border-radius:18px;
+    transform:scale(0.8);
+    transition:0.4s;
+    box-shadow:0 30px 60px rgba(0,0,0,0.6);
+    position:relative;
+}
+
+.modal.active .modal-content{
+    transform:scale(1);
+}
+
+.modal-content h2{
+    color:#38bdf8;
+    margin-bottom:15px;
+}
+
+.modal-content p{
+    color:#cbd5f5;
+    line-height:1.6;
+}
+
+.close-btn{
+    position:absolute;
+    top:10px;
+    right:20px;
+    font-size:2rem;
+    color:#38bdf8;
+    cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:30px;
+    background:rgba(255,255,255,0.05);
+    color:#94a3b8;
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+    nav ul{display:none;}
+}
+
+
+/* ===== HERO IMAGE UPGRADE ===== */
+
+.hero{
+    position:relative;
+    min-height:100vh;
+    background:url("https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2")
+    center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        rgba(2,6,23,0.75),
+        rgba(2,6,23,0.95)
+    );
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:900px;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:3.5rem;
+}
+
+.hero p{
+    font-size:1.2rem;
+}
+
+.hero-btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 35px;
+    border-radius:40px;
+    background:#38bdf8;
+    color:#020617;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.hero-btn:hover{
+    background:#0ea5e9;
+    transform:translateY(-3px);
+}
+
+.scroll-indicator{
+    position:absolute;
+    bottom:25px;
+    letter-spacing:2px;
+    opacity:0.7;
+    animation:scroll 1.8s infinite;
+}
+
+@keyframes scroll{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(10px);}
+    100%{transform:translateY(0);}
+}
+
+
+/* ===============================
+   FULL RESPONSIVE SUPPORT
+================================ */
+
+/* HAMBURGER */
+.menu-toggle{
+    display:none;
+    font-size:1.8rem;
+    color:#38bdf8;
+    cursor:pointer;
+}
+
+/* NAVBAR MOBILE */
+@media(max-width:900px){
+    nav{
+        padding:15px 20px;
     }
 
-    .box {
-      text-align: center;
-      background: #fff;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    nav ul{
+        position:absolute;
+        top:70px;
+        right:0;
+        background:#020617;
+        flex-direction:column;
+        width:220px;
+        padding:20px;
+        display:none;
+        gap:15px;
+        border-radius:0 0 0 20px;
     }
 
-    h1 {
-      margin-bottom: 10px;
+    nav ul.show{
+        display:flex;
     }
 
-    p {
-      font-size: 14px;
-      color: #666;
+    .menu-toggle{
+        display:block;
     }
-  </style>
+
+
+    /* HERO RESPONSIVE */
+@media(max-width:768px){
+    .hero h1{
+        font-size:2.4rem;
+    }
+
+    .hero p{
+        font-size:1rem;
+    }
+}
+
+@media(max-width:480px){
+    .hero h1{
+        font-size:2rem;
+    }
+
+    .hero-btn{
+        padding:12px 26px;
+        font-size:0.9rem;
+    }
+}
+
+/* SECTION RESPONSIVE */
+@media(max-width:600px){
+    section{
+        padding:60px 20px;
+    }
+
+    section h2{
+        font-size:1.9rem;
+    }
+}
+
+/* CARD RESPONSIVE */
+@media(max-width:600px){
+    .card img{
+        height:160px;
+    }
+
+    .card-content p{
+        font-size:0.85rem;
+    }
+}
+
+/* MODAL RESPONSIVE */
+@media(max-width:500px){
+    .modal-content{
+        padding:20px;
+    }
+
+    .modal-content h2{
+        font-size:1.4rem;
+    }
+
+    .close-btn{
+        font-size:1.6rem;
+    }
+}
+
+
+}
+
+
+</style>
 </head>
+
 <body>
 
-  <div class="box">
-    <h1>🚧 Under Construction</h1>
-    <p>Our website is coming soon.</p>
-  </div>
+<!-- NAVBAR -->
+<nav>
+    <h2>Animation</h2>
+    <div class="menu-toggle" id="menuToggle">☰</div>
+    <ul id="navMenu">
+
+        <li><a href="#home">Home</a></li>
+        <li><a href="#principles">Principles</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+</nav>
+
+<header class="hero" id="home">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1>12 Principles of Animation</h1>
+        <p>A modern portfolio-style website showcasing Disney’s animation principles.</p>
+        <a href="#principles" class="hero-btn">Explore Principles</a>
+    </div>
+
+    <div class="scroll-indicator">↓ Scroll</div>
+</header>
+
+
+<!-- PRINCIPLES -->
+<section id="principles">
+<h2>Animation Principles</h2>
+
+
+<div class="grid">
+
+<!-- 01 -->
+<div class="card"
+data-title="Squash & Stretch"
+data-text="Squash and Stretch gives objects weight, flexibility, and life. When a ball hits the ground it squashes, and when it jumps it stretches. This principle keeps the volume consistent while enhancing realism and expressiveness in animation.">
+<img src="images/sqigh.png">
+<div class="card-content">
+<span>01</span>
+<h3>Squash & Stretch</h3>
+<p>Creates weight and flexibility.</p>
+</div>
+</div>
+
+<!-- 02 -->
+<div class="card"
+data-title="Anticipation"
+data-text="Anticipation prepares the audience for an action. Before a jump, a character bends their knees; before throwing, the arm moves back. This makes movements clear, believable, and easy to follow.">
+<img src="images/anticipitantion.png">
+<div class="card-content">
+<span>02</span>
+<h3>Anticipation</h3>
+<p>Prepares viewers for action.</p>
+</div>
+</div>
+
+<!-- 03 -->
+<div class="card"
+data-title="Staging"
+data-text="Staging presents an idea clearly by directing the audience’s attention. Camera angles, lighting, composition, and character placement ensure the main action is easily understood.">
+<img src="images/staging.png">
+<div class="card-content">
+<span>03</span>
+<h3>Staging</h3>
+<p>Clear presentation of action.</p>
+</div>
+</div>
+
+<!-- 04 -->
+<div class="card"
+data-title="Straight Ahead & Pose to Pose"
+data-text="Straight Ahead animation is drawn frame by frame for fluid motion. Pose to Pose focuses on key poses first for better control. Professionals often combine both techniques.">
+<img src="images/straighahed.png">
+<div class="card-content">
+<span>04</span>
+<h3>Straight Ahead & Pose to Pose</h3>
+<p>Two animation techniques.</p>
+</div>
+</div>
+
+<!-- 05 -->
+<div class="card"
+data-title="Follow Through & Overlapping Action"
+data-text="Follow Through means parts of the body continue moving after the main action stops. Overlapping Action occurs when different body parts move at different speeds, creating natural motion.">
+<img src="images/floww through.png">
+<div class="card-content">
+<span>05</span>
+<h3>Follow Through & Overlap</h3>
+<p>Natural continuation of motion.</p>
+</div>
+</div>
+
+<!-- 06 -->
+<div class="card"
+data-title="Slow In & Slow Out"
+data-text="Objects do not start or stop suddenly. Slow In & Slow Out adds more frames at the beginning and end of an action, making movement smoother and more realistic.">
+<img src="images/slow in.png">
+<div class="card-content">
+<span>06</span>
+<h3>Slow In & Slow Out</h3>
+<p>Smooth start and stop.</p>
+</div>
+</div>
+
+<!-- 07 -->
+<div class="card"
+data-title="Arcs"
+data-text="Most natural movements follow curved paths called arcs. Using arcs instead of straight lines makes character movements look fluid, organic, and lifelike.">
+<img src="images/Arcs.png">
+<div class="card-content">
+<span>07</span>
+<h3>Arcs</h3>
+<p>Curved, natural motion.</p>
+</div>
+</div>
+
+<!-- 08 -->
+<div class="card"
+data-title="Secondary Action"
+data-text="Secondary Action supports the main action without distracting from it. Examples include blinking, breathing, or arm movement while walking, adding depth and personality.">
+<img src="images/secondary action.png">
+<div class="card-content">
+<span>08</span>
+<h3>Secondary Action</h3>
+<p>Enhances main movement.</p>
+</div>
+</div>
+
+<!-- 09 -->
+<div class="card"
+data-title="Timing"
+data-text="Timing controls speed, emotion, and realism. More frames make movement slower and heavier, while fewer frames create fast, energetic actions.">
+<img src="images/tmming.png">
+<div class="card-content">
+<span>09</span>
+<h3>Timing</h3>
+<p>Controls speed and emotion.</p>
+</div>
+</div>
+
+<!-- 10 -->
+<div class="card"
+data-title="Exaggeration"
+data-text="Exaggeration pushes movements slightly beyond reality to improve clarity and impact. It makes animation more dynamic without losing believability.">
+<img src="images/Exaggeration.png">
+<div class="card-content">
+<span>10</span>
+<h3>Exaggeration</h3>
+<p>Enhances expressiveness.</p>
+</div>
+</div>
+
+<!-- 11 -->
+<div class="card"
+data-title="Solid Drawing"
+data-text="Solid Drawing focuses on anatomy, balance, perspective, and weight. Even in digital animation, strong drawing fundamentals create believable characters.">
+<img src="images/solid drawing.png">
+<div class="card-content">
+<span>11</span>
+<h3>Solid Drawing</h3>
+<p>Strong form and balance.</p>
+</div>
+</div>
+
+<!-- 12 -->
+<div class="card"
+data-title="Appeal"
+data-text="Appeal makes characters interesting and engaging. Appealing characters are clear, readable, and enjoyable to watch—not necessarily cute, but memorable.">
+<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+<div class="card-content">
+<span>12</span>
+<h3>Appeal</h3>
+<p>Engaging and memorable design.</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- ADD REMAINING PRINCIPLES SIMILARLY -->
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+<h2>About This Project</h2>
+<p style="text-align:center;color:#cbd5f5;max-width:800px;margin:auto;">
+This website demonstrates animation principles using modern UI, animations, and interactivity.
+</p>
+</section>
+
+<footer>
+© 2026 | Animation Portfolio Website
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<span class="close-btn" id="closeModal">&times;</span>
+<h2 id="modalTitle"></h2>
+<p id="modalText"></p>
+</div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+/* SCROLL ANIMATION */
+const cards = document.querySelectorAll(".card");
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
+},{threshold:0.2});
+cards.forEach(card=>observer.observe(card));
+
+/* MODAL */
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+const closeModal = document.getElementById("closeModal");
+
+cards.forEach(card=>{
+    card.addEventListener("click",()=>{
+        modalTitle.textContent = card.dataset.title;
+        modalText.textContent = card.dataset.text;
+        modal.classList.add("active");
+    });
+});
+
+closeModal.onclick = ()=> modal.classList.remove("active");
+modal.onclick = e => { if(e.target === modal) modal.classList.remove("active"); };
+</script>
+<script>
+const toggle = document.getElementById("menuToggle");
+const menu = document.getElementById("navMenu");
+
+toggle.onclick = () => {
+    menu.classList.toggle("show");
+};
+</script>
+
 
 </body>
 </html>
